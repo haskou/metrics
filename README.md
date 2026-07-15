@@ -1,9 +1,10 @@
+# @haskou/metrics
+
 [![CI](https://github.com/haskou/metrics/actions/workflows/ci.yml/badge.svg)](https://github.com/haskou/metrics/actions/workflows/ci.yml)
+[![Codecov](https://codecov.io/gh/haskou/metrics/graph/badge.svg)](https://codecov.io/gh/haskou/metrics)
 [![Renovate](https://img.shields.io/badge/renovate-enabled-brightgreen.svg)](https://renovatebot.com/)
 [![npm](https://img.shields.io/npm/v/@haskou/metrics.svg)](https://www.npmjs.com/package/@haskou/metrics)
 [![License: MIT](https://img.shields.io/badge/license-MIT-yellow.svg)](LICENSE.txt)
-
-# @haskou/metrics
 
 Metrics and structured logs for TypeScript methods.
 
@@ -145,6 +146,21 @@ yarn add @haskou/metrics
 Enable `experimentalDecorators` only when your project still uses the legacy
 implementation.
 
-Read [`docs`](docs/) for guides and adapter examples.
+Read the [documentation](https://haskou.github.io/metrics/) for guides and
+adapter examples.
+
+## Releases
+
+Merging a pull request into `main` or `master` publishes a new npm version after
+CI passes. The source branch selects the version bump:
+
+| Branch               | Version |
+| -------------------- | ------- |
+| `fix` or `fix/*`     | Patch   |
+| `feat` or `feat/*`   | Minor   |
+| `break` or `break/*` | Major   |
+
+Renovate pull requests with a `fix:` or `fix(...):` title publish a patch. See
+[RELEASING.md](RELEASING.md) for trusted publishing, tags, and release notes.
 
 MIT. See [LICENSE.txt](LICENSE.txt).
