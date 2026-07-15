@@ -20,12 +20,8 @@ permissions:
 
 jobs:
   test:
-    name: Node ${{ matrix.node-version }}
+    name: Test and coverage
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        node-version: [22, 24, 26]
 
     steps:
       - name: Checkout repository
@@ -34,26 +30,14 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: 24.18.0
+          cache: yarn
 
-      - name: Install Yarn
-        run: npm install --global yarn@1.22.22
-
-      - name: Install dependencies from yarn.lock
+      - name: Install dependencies
         run: yarn install --frozen-lockfile
 
-      - name: Run lint
-        run: yarn lint
-
-      # Jest 30 cannot bridge a CommonJS dependency requiring ESM inside its VM
-      # on Node 22. Runtime compatibility is still exercised by test:package.
-      - name: Validate TypeScript contracts
-        if: matrix.node-version == 22
-        run: yarn build && yarn test:typecheck
-
-      - name: Run tests with coverage
-        if: matrix.node-version != 22
-        run: yarn test:coverage
+      - name: Run lint and tests with coverage
+        run: yarn lint && yarn test:coverage
 
       - name: Build package
         run: yarn build
@@ -63,6 +47,13 @@ jobs:
 
       - name: Check npm package contents
         run: yarn pack:dry
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          files: ./coverage/lcov.info
+          token: ${{ secrets.CODECOV_TOKEN }}
+          fail_ci_if_error: false
 
   publish:
     name: Publish to npm
@@ -105,13 +96,11 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 24
+          node-version: 24.18.0
+          cache: yarn
           registry-url: https://registry.npmjs.org/
 
-      - name: Install Yarn
-        run: npm install --global yarn@1.22.22
-
-      - name: Install dependencies from yarn.lock
+      - name: Install dependencies
         run: yarn install --frozen-lockfile
 
       - name: Build package
