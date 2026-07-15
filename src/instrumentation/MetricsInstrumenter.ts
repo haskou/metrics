@@ -7,7 +7,8 @@ import type { DecoratedMethod } from './DecoratedMethod.js';
 import type { InstrumentationDependencies } from './InstrumentationDependencies.js';
 import type { InstrumentationOptions } from './InstrumentationOptions.js';
 
-import { NodeResourceUsageAdapter, SystemClock } from '../adapters/index.js';
+import { NodeResourceUsageAdapter } from '../adapters/node/NodeResourceUsageAdapter.js';
+import { SystemClock } from '../adapters/system/SystemClock.js';
 import { InstrumentationExecution } from './InstrumentationExecution.js';
 import { NoopLoggerAdapter } from './NoopLoggerAdapter.js';
 import { NoopMetricsAdapter } from './NoopMetricsAdapter.js';
