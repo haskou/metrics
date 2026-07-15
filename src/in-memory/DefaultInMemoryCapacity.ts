@@ -1,0 +1,1 @@
+export const DEFAULT_IN_MEMORY_CAPACITY = 1_000;
