@@ -32,6 +32,26 @@
       "import": "./dist/adapters/prometheus/index.js",
       "require": "./dist/adapters/prometheus/index.cjs"
     },
+    "./contracts": {
+      "types": "./dist/contracts/index.d.ts",
+      "import": "./dist/contracts/index.js",
+      "require": "./dist/contracts/index.cjs"
+    },
+    "./configuration": {
+      "types": "./dist/configuration/index.d.ts",
+      "import": "./dist/configuration/index.js",
+      "require": "./dist/configuration/index.cjs"
+    },
+    "./instrumentation": {
+      "types": "./dist/instrumentation/index.d.ts",
+      "import": "./dist/instrumentation/index.js",
+      "require": "./dist/instrumentation/index.cjs"
+    },
+    "./model": {
+      "types": "./dist/model/index.d.ts",
+      "import": "./dist/model/index.js",
+      "require": "./dist/model/index.cjs"
+    },
     "./package.json": "./package.json"
   },
   "files": [

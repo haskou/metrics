@@ -5,11 +5,18 @@ import {
   instrumentFunction,
   measure,
   metrics,
-  type MetricMeasurement,
-  type MetricsPort,
 } from '@haskou/metrics';
 import { ConsoleLoggerAdapter } from '@haskou/metrics/adapters/console';
 import { NodeResourceUsageAdapter } from '@haskou/metrics/adapters/node';
+import type {
+  MetricKind,
+  MetricNameFormatter,
+  MetricsConfiguration,
+  MetricsDefaults,
+} from '@haskou/metrics/configuration';
+import type { MetricsPort } from '@haskou/metrics/contracts';
+import type { InstrumentationOptions } from '@haskou/metrics/instrumentation';
+import type { MetricMeasurement } from '@haskou/metrics/model';
 import {
   InMemoryLoggerAdapter,
   InMemoryMetricsAdapter,
@@ -39,11 +46,22 @@ class CustomAdapter implements MetricsPort {
 }
 
 const adapter: MetricsPort = new CustomAdapter();
-configureMetrics({
+const defaults: MetricsDefaults = { recordCpu: true };
+const nameFormatter: MetricNameFormatter = (
+  operation: string,
+  kind: MetricKind,
+) => `${operation}.${kind}`;
+const configuration: MetricsConfiguration = {
   adapter,
+  defaults,
   logger: new ConsoleLoggerAdapter(),
+  nameFormatter,
   resourceUsage: new NodeResourceUsageAdapter(),
-});
+};
+const instrumentationOptions: InstrumentationOptions = {
+  attributes: { source: 'consumer' },
+};
+configureMetrics(configuration);
 
 const creator = new UserCreator();
 const userPromise: Promise<User> = creator.create({ name: 'Ada' });
@@ -73,4 +91,5 @@ void inMemoryLogger;
 void clock;
 void resources;
 void instrumenter;
+void instrumentationOptions;
 void defaultSnapshot;

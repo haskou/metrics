@@ -1,6 +1,7 @@
 import { jest } from '@jest/globals';
 
 import { MetricsInstrumenter } from '../../src/instrumentation/MetricsInstrumenter.js';
+import { InMemoryLoggerAdapter } from '../../src/testing/InMemoryLoggerAdapter.js';
 import { InMemoryMetricsAdapter } from '../../src/testing/InMemoryMetricsAdapter.js';
 import { ManualClock } from '../../src/testing/ManualClock.js';
 
@@ -83,6 +84,31 @@ describe(MetricsInstrumenter.name, () => {
       unit: 'count',
       value: 1,
     });
+  });
+
+  it('preserves defaults when operation options are undefined', () => {
+    const logger = new InMemoryLoggerAdapter();
+    const instrumenter = new MetricsInstrumenter({
+      adapter: new InMemoryMetricsAdapter(),
+      defaults: { logFailures: false },
+      logger,
+    });
+
+    expect(() =>
+      instrumenter.measure(
+        'users.create',
+        () => {
+          throw new Error('failed');
+        },
+        { logFailures: undefined },
+      ),
+    ).toThrow('failed');
+    expect(logger.entries).toEqual([
+      expect.objectContaining({
+        level: 'called',
+        operation: 'users.create',
+      }),
+    ]);
   });
 
   it('creates functions that preserve arguments and this binding', () => {

@@ -1,13 +1,5 @@
-export * from './configuration/index.js';
-export * from './contracts/index.js';
-export * from './errors/index.js';
-export type {
-  InMemoryLogRecord,
-  InMemoryMetricRecord,
-  MetricsInspectionSnapshot,
-} from './in-memory/index.js';
-export * from './instrumentation/index.js';
-export * from './logging/index.js';
-export * from './metrics/index.js';
-export * from './resources/index.js';
-export * from './values/index.js';
+export { Metrics } from './instrumentation/Metrics.js';
+export { MetricsInstrumenter } from './instrumentation/MetricsInstrumenter.js';
+export { configureMetrics } from './instrumentation/configureMetrics.js';
+export { instrumentFunction, measure } from './instrumentation/measure.js';
+export { metrics } from './instrumentation/metricsInstance.js';
