@@ -8,6 +8,10 @@ const entrypoints = [
   '@haskou/metrics/adapters/console',
   '@haskou/metrics/adapters/node',
   '@haskou/metrics/adapters/prometheus',
+  '@haskou/metrics/configuration',
+  '@haskou/metrics/contracts',
+  '@haskou/metrics/instrumentation',
+  '@haskou/metrics/model',
 ];
 
 const require = createRequire(import.meta.url);
@@ -32,6 +36,12 @@ for (const entrypoint of [
   'dist/adapters/console/index.js',
   'dist/adapters/node/index.js',
   'dist/adapters/prometheus/index.js',
+  'dist/configuration/index.js',
+  'dist/configuration/index.cjs',
+  'dist/configuration/index.d.ts',
+  'dist/instrumentation/index.js',
+  'dist/instrumentation/index.cjs',
+  'dist/instrumentation/index.d.ts',
 ]) {
   assert.ok(files.includes(entrypoint), `Package file missing: ${entrypoint}`);
 }

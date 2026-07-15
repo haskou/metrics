@@ -70,6 +70,39 @@ export class MetricsInstrumenter {
     );
   }
 
+  private loggingOptionsWithDefaults(
+    options: InstrumentationOptions,
+  ): InstrumentationOptions {
+    return {
+      captureStackTrace:
+        options.captureStackTrace ?? this.defaults.captureStackTrace,
+      logCalls: options.logCalls ?? this.defaults.logCalls,
+      logFailures: options.logFailures ?? this.defaults.logFailures,
+    };
+  }
+
+  private recordingOptionsWithDefaults(
+    options: InstrumentationOptions,
+  ): InstrumentationOptions {
+    return {
+      recordCalls: options.recordCalls ?? this.defaults.recordCalls,
+      recordCpu: options.recordCpu ?? this.defaults.recordCpu,
+      recordDuration: options.recordDuration ?? this.defaults.recordDuration,
+      recordFailures: options.recordFailures ?? this.defaults.recordFailures,
+      recordMemory: options.recordMemory ?? this.defaults.recordMemory,
+    };
+  }
+
+  private optionsWithDefaults(
+    options: InstrumentationOptions,
+  ): InstrumentationOptions {
+    return {
+      attributes: options.attributes,
+      ...this.loggingOptionsWithDefaults(options),
+      ...this.recordingOptionsWithDefaults(options),
+    };
+  }
+
   public measure<Result>(
     name: string,
     operation: () => Result,
@@ -79,10 +112,11 @@ export class MetricsInstrumenter {
       return operation();
     }
 
-    const execution = new InstrumentationExecution(name, this.dependencies, {
-      ...this.defaults,
-      ...options,
-    });
+    const execution = new InstrumentationExecution(
+      name,
+      this.dependencies,
+      this.optionsWithDefaults(options),
+    );
     execution.start();
 
     try {
