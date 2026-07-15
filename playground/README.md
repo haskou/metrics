@@ -5,4 +5,5 @@ yarn playground:dev
 ```
 
 Open the local URL printed by Vite. The demo uses the default bounded in-memory
-runtime, so it needs no adapter configuration or backend.
+runtime, so it needs no adapter configuration or backend. It queries GitHub's
+public API and shows the real response beside its metrics and structured logs.

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Interactive @haskou/metrics in-memory playground"
+      content="Inspect real method telemetry with @haskou/metrics"
     />
     <title>@haskou/metrics playground</title>
   </head>
@@ -13,26 +13,70 @@
     <main>
       <header>
         <p class="eyebrow">@haskou/metrics playground</p>
-        <h1>Call a method.<br />Watch the telemetry appear.</h1>
+        <h1>Make a real request.<br />Inspect its telemetry.</h1>
         <p class="intro">
-          No setup. The default runtime keeps the latest 1,000 metrics and logs
-          in memory.
+          Enter any public GitHub repository. One decorated method makes the
+          request while the default runtime records its calls, duration, logs,
+          and failures.
         </p>
       </header>
 
-      <section class="controls" aria-label="Demo controls">
-        <button id="success" class="primary">Create user</button>
-        <button id="failure">Simulate failure</button>
-        <button id="clear" class="quiet">Clear</button>
+      <section class="demo" aria-label="Repository inspector">
+        <form id="repository-form" class="query-card">
+          <label for="repository">GitHub repository</label>
+          <div class="query-controls">
+            <input
+              id="repository"
+              name="repository"
+              value="haskou/metrics"
+              placeholder="owner/repository"
+              autocomplete="off"
+              spellcheck="false"
+            />
+            <button id="inspect" class="primary" type="submit">
+              Inspect repository
+            </button>
+          </div>
+          <p>
+            Change the value to a missing repository to capture a real HTTP
+            failure and stack trace.
+          </p>
+        </form>
+
+        <article id="result" class="result">
+          <span id="result-status" class="result-status">No request yet</span>
+          <a id="result-name">Run the decorated method</a>
+          <p id="result-description">
+            The result will come from GitHub's public API.
+          </p>
+          <dl>
+            <div>
+              <dt>Stars</dt>
+              <dd id="result-stars">—</dd>
+            </div>
+            <div>
+              <dt>Forks</dt>
+              <dd id="result-forks">—</dd>
+            </div>
+            <div>
+              <dt>Open issues</dt>
+              <dd id="result-issues">—</dd>
+            </div>
+            <div>
+              <dt>Updated</dt>
+              <dd id="result-updated">—</dd>
+            </div>
+          </dl>
+        </article>
       </section>
 
       <section class="stats" aria-label="Metric summary">
         <article><span>Calls</span><strong id="calls">0</strong></article>
         <article><span>Failures</span><strong id="failures">0</strong></article>
         <article>
-          <span>Avg. duration</span><strong id="duration">0 ms</strong>
+          <span>Last duration</span><strong id="duration">0 ms</strong>
         </article>
-        <article><span>Buffered</span><strong id="buffered">0</strong></article>
+        <article><span>Logs</span><strong id="logs">0</strong></article>
       </section>
 
       <section class="panels">
@@ -41,21 +85,42 @@
             <h2>Metrics</h2>
             <span>latest first</span>
           </div>
-          <pre id="metric-output">Run an action to collect metrics.</pre>
+          <ul id="metric-output" class="event-list"></ul>
         </article>
 
         <article class="panel">
           <div class="panel-title">
-            <h2>Logs</h2>
-            <span>stack traces on failure</span>
+            <h2>Structured logs</h2>
+            <button id="clear" class="quiet" type="button">
+              Clear telemetry
+            </button>
           </div>
-          <pre id="log-output">Run an action to collect logs.</pre>
+          <ul id="log-output" class="event-list"></ul>
         </article>
       </section>
 
+      <section class="source-panel">
+        <div class="panel-title">
+          <h2>The instrumented method</h2>
+          <span>no configuration required</span>
+        </div>
+        <pre><code>class GitHubRepositoryFinder {
+  @Metrics()
+  public async find(repository: string): Promise&lt;Repository&gt; {
+    const response = await fetch(githubUrl(repository));
+
+    if (!response.ok) {
+      throw new GitHubRepositoryRequestError(repository, response.status);
+    }
+
+    return response.json();
+  }
+}</code></pre>
+      </section>
+
       <footer>
-        CPU and RAM sampling use Node.js process APIs and are demonstrated in
-        the package tests.
+        This browser demo records real calls, failures, logs, and elapsed time.
+        CPU and RAM sampling require the Node.js adapter.
       </footer>
     </main>
     <script type="module" src="/src/main.ts"></script>
