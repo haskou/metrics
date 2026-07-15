@@ -49,7 +49,7 @@ jobs:
       # on Node 22. Runtime compatibility is still exercised by test:package.
       - name: Validate TypeScript contracts
         if: matrix.node-version == 22
-        run: yarn test:typecheck
+        run: yarn build && yarn test:typecheck
 
       - name: Run tests with coverage
         if: matrix.node-version != 22
