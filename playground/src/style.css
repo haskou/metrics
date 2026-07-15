@@ -335,6 +335,20 @@ h2 {
     monospace;
 }
 
+.log-attributes {
+  display: block;
+  margin-top: 6px;
+  overflow: hidden;
+  color: #98a3ae;
+  font:
+    12px ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    monospace;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .log-level {
   color: #71e5a7;
   font:
