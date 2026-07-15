@@ -1,6 +1,6 @@
 {
   "name": "@haskou/metrics",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Framework-agnostic metrics instrumentation for TypeScript with explicit ports, functions, and decorators.",
   "type": "module",
   "main": "./dist/index.cjs",
