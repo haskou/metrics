@@ -48,6 +48,20 @@ function emptyEvent(message: string): HTMLLIElement {
   return item;
 }
 
+function formatAttributes(attributes: Record<string, unknown>): string {
+  const entries = Object.entries(attributes).toSorted(([left], [right]) =>
+    left.localeCompare(right),
+  );
+
+  if (!entries.length) {
+    return 'attributes: none';
+  }
+
+  return `attributes: ${entries
+    .map(([key, value]) => `${key}=${String(value)}`)
+    .join(', ')}`;
+}
+
 function renderTelemetry(): void {
   const snapshot = metrics.snapshot();
   const calls = snapshot.metrics.filter(({ name }) => name.endsWith('.calls'));
@@ -114,6 +128,14 @@ function renderTelemetry(): void {
       message.textContent = entry.message;
       heading.append(level, timestamp);
       item.append(heading, message);
+
+      if (entry.level === 'called') {
+        const attributes = document.createElement('span');
+
+        attributes.className = 'log-attributes';
+        attributes.textContent = formatAttributes(entry.attributes);
+        item.append(attributes);
+      }
 
       if (entry.stackTrace) {
         const details = document.createElement('details');

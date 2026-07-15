@@ -1,4 +1,4 @@
-import { Metrics } from '../../../src/index.js';
+import { measure } from '../../../src/index.js';
 import { GitHubRepositoryRequestError } from '../errors/GitHubRepositoryRequestError.js';
 import { InvalidGitHubRepositoryNameError } from '../errors/InvalidGitHubRepositoryNameError.js';
 import type { GitHubRepositorySummary } from './GitHubRepositorySummary.js';
@@ -14,9 +14,24 @@ interface GitHubRepositoryResponse {
 }
 
 export class GitHubRepositoryFinder {
-  @Metrics()
   public async find(repository: string): Promise<GitHubRepositorySummary> {
-    const segments = repository.trim().split('/');
+    const normalizedRepository = repository.trim();
+
+    return measure(
+      'GitHubRepositoryFinder.find',
+      async () => this.findRepository(normalizedRepository),
+      {
+        attributes: {
+          repository: normalizedRepository,
+        },
+      },
+    );
+  }
+
+  private async findRepository(
+    repository: string,
+  ): Promise<GitHubRepositorySummary> {
+    const segments = repository.split('/');
 
     if (segments.length !== 2 || segments.some((segment) => !segment)) {
       throw new InvalidGitHubRepositoryNameError(repository);
