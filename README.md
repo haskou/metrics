@@ -85,6 +85,11 @@ configureMetrics({
     registry,
   }),
   attributes: { service: 'users-api' },
+  defaults: {
+    logCalls: false,
+    logFailures: true,
+    recordDuration: true,
+  },
   logger: new ConsoleLoggerAdapter(),
 });
 ```
@@ -107,6 +112,13 @@ The ports map directly to the APIs used by common observability tools:
 Grafana supports Prometheus as a built-in data source. Grafana Cloud also
 accepts Prometheus metrics and OTLP, so the library does not force a monitoring
 vendor or SDK into your application.
+
+### Prometheus cardinality
+
+Never use identifiers, full URLs, request IDs, user IDs, error messages, stack
+traces, email addresses, or any other unbounded value as Prometheus attributes.
+Keep `operation` names and promoted attributes low-cardinality and stable, such
+as `service`, `environment`, `route`, `method`, or a bounded status code.
 
 `MetricsPort`, `LoggerPort`, `ClockPort`, and `ResourceUsagePort` keep vendor
 SDKs outside the instrumentation core. See the

@@ -5,11 +5,11 @@ import {
   instrumentFunction,
   measure,
   metrics,
-  type MetricMeasurement,
-  type MetricsPort,
 } from '@haskou/metrics';
 import { ConsoleLoggerAdapter } from '@haskou/metrics/adapters/console';
 import { NodeResourceUsageAdapter } from '@haskou/metrics/adapters/node';
+import type { MetricsPort } from '@haskou/metrics/contracts';
+import type { MetricMeasurement } from '@haskou/metrics/model';
 import {
   InMemoryLoggerAdapter,
   InMemoryMetricsAdapter,

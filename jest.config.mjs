@@ -18,6 +18,7 @@ export default {
     '!<rootDir>/src/instrumentation/LegacyMetricsMethodDecorator.ts',
     '!<rootDir>/src/instrumentation/MetricsMethodDecorator.ts',
     '!<rootDir>/src/instrumentation/StandardMetricsMethodDecorator.ts',
+    '!<rootDir>/src/logging/InstrumentationErrorPrimitives.ts',
     '!<rootDir>/src/logging/InstrumentationLogPrimitives.ts',
     '!<rootDir>/src/metrics/MetricMeasurementPrimitives.ts',
     '!<rootDir>/src/metrics/MetricUnit.ts',

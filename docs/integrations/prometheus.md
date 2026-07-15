@@ -33,6 +33,17 @@ in `attributeNames`; missing attributes become empty label values and booleans
 become strings. Keep operation names and attribute values bounded to control
 cardinality.
 
+## Cardinality rules
+
+Never promote identifiers, full URLs, request IDs, user IDs, tenant IDs with
+unbounded growth, error messages, stack traces, email addresses, or free-form
+input as Prometheus labels. Prometheus stores a new time series for every unique
+label set, so one accidental `userId` or raw URL label can dominate storage and
+query cost.
+
+Prefer bounded labels such as `service`, `environment`, `method`, `route`,
+`status`, `queue`, or explicit operation names like `users.create`.
+
 ## Expose a scrape endpoint
 
 Prometheus needs an HTTP endpoint that returns `registry.metrics()` with the

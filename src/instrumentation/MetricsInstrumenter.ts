@@ -2,6 +2,7 @@ import type {
   MetricKind,
   MetricNameFormatter,
   MetricsConfiguration,
+  MetricsDefaults,
 } from '../configuration/index.js';
 import type { DecoratedMethod } from './DecoratedMethod.js';
 import type { InstrumentationDependencies } from './InstrumentationDependencies.js';
@@ -16,6 +17,13 @@ import { NoopResourceUsageAdapter } from './NoopResourceUsageAdapter.js';
 
 export class MetricsInstrumenter {
   private readonly dependencies: InstrumentationDependencies;
+  private readonly defaults: MetricsDefaults;
+
+  private static defaultsFrom(
+    configuration: MetricsConfiguration,
+  ): MetricsDefaults {
+    return Object.freeze({ ...(configuration.defaults ?? {}) });
+  }
 
   public static disabled(): MetricsInstrumenter {
     return new MetricsInstrumenter(
@@ -36,6 +44,7 @@ export class MetricsInstrumenter {
     const formatter: MetricNameFormatter =
       configuration.nameFormatter ??
       ((operationName: string, kind: MetricKind) => `${operationName}.${kind}`);
+    this.defaults = MetricsInstrumenter.defaultsFrom(configuration);
 
     this.dependencies = {
       attributes: Object.freeze({ ...(configuration.attributes ?? {}) }),
@@ -70,11 +79,10 @@ export class MetricsInstrumenter {
       return operation();
     }
 
-    const execution = new InstrumentationExecution(
-      name,
-      this.dependencies,
-      options,
-    );
+    const execution = new InstrumentationExecution(name, this.dependencies, {
+      ...this.defaults,
+      ...options,
+    });
     execution.start();
 
     try {

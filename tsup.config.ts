@@ -4,10 +4,12 @@ export default defineConfig({
   clean: true,
   dts: true,
   entry: {
-    index: 'src/index.ts',
     'adapters/console/index': 'src/adapters/console/index.ts',
     'adapters/node/index': 'src/adapters/node/index.ts',
     'adapters/prometheus/index': 'src/adapters/prometheus/index.ts',
+    'contracts/index': 'src/contracts/index.ts',
+    index: 'src/index.ts',
+    'model/index': 'src/model/index.ts',
     'testing/index': 'src/testing/index.ts',
   },
   format: ['esm', 'cjs'],
