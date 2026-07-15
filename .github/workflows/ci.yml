@@ -45,7 +45,14 @@ jobs:
       - name: Run lint
         run: yarn lint
 
+      # Jest 30 cannot bridge a CommonJS dependency requiring ESM inside its VM
+      # on Node 22. Runtime compatibility is still exercised by test:package.
+      - name: Validate TypeScript contracts
+        if: matrix.node-version == 22
+        run: yarn test:typecheck
+
       - name: Run tests with coverage
+        if: matrix.node-version != 22
         run: yarn test:coverage
 
       - name: Build package
