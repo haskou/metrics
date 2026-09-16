@@ -15,7 +15,10 @@
     "ignoreDeprecations": "6.0",
     "noUncheckedIndexedAccess": true,
     "skipLibCheck": true,
-    "types": ["node"]
+    "types": ["node"],
+    "paths": {
+      "#resource-usage": ["./src/adapters/system/defaultResourceUsage.ts"]
+    }
   },
   "include": ["src/**/*.ts"]
 }

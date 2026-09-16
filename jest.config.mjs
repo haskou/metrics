@@ -40,6 +40,8 @@ export default {
   errorOnDeprecated: true,
   extensionsToTreatAsEsm: ['.ts'],
   moduleNameMapper: {
+    '^#resource-usage$':
+      '<rootDir>/src/adapters/system/defaultResourceUsage.ts',
     '^(\\.{1,2}/.*)\\.js$': '$1',
   },
   setupFilesAfterEnv: ['<rootDir>/tests/setup.ts'],

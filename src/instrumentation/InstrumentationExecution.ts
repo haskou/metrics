@@ -32,7 +32,7 @@ export class InstrumentationExecution {
       ? this.safelyRead(() => this.dependencies.clock.now())
       : undefined;
     const finishedResources = this.shouldCaptureResources()
-      ? this.safelyRead(() => this.dependencies.resourceUsage.capture())
+      ? this.safelyRead(() => this.dependencies.resourceUsage?.capture())
       : undefined;
 
     if (this.startedAt && finishedAt) {
@@ -157,7 +157,7 @@ export class InstrumentationExecution {
 
     if (this.shouldCaptureResources()) {
       this.startedResources = this.safelyRead(() =>
-        this.dependencies.resourceUsage.capture(),
+        this.dependencies.resourceUsage?.capture(),
       );
     }
 

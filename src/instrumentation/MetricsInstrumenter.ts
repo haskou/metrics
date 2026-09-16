@@ -1,3 +1,5 @@
+import { defaultResourceUsage } from '#resource-usage';
+
 import type {
   MetricKind,
   MetricNameFormatter,
@@ -8,7 +10,6 @@ import type { DecoratedMethod } from './DecoratedMethod.js';
 import type { InstrumentationDependencies } from './InstrumentationDependencies.js';
 import type { InstrumentationOptions } from './InstrumentationOptions.js';
 
-import { NodeResourceUsageAdapter } from '../adapters/node/NodeResourceUsageAdapter.js';
 import { SystemClock } from '../adapters/system/SystemClock.js';
 import { InstrumentationExecution } from './InstrumentationExecution.js';
 import { NoopLoggerAdapter } from './NoopLoggerAdapter.js';
@@ -54,8 +55,7 @@ export class MetricsInstrumenter {
       logger: configuration.logger ?? new NoopLoggerAdapter(),
       metrics: configuration.adapter,
       onInstrumentationError: configuration.onInstrumentationError,
-      resourceUsage:
-        configuration.resourceUsage ?? new NodeResourceUsageAdapter(),
+      resourceUsage: configuration.resourceUsage ?? defaultResourceUsage,
     };
   }
 

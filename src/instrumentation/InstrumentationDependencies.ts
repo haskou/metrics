@@ -14,5 +14,5 @@ export interface InstrumentationDependencies {
   readonly logger: LoggerPort;
   readonly metrics: MetricsPort;
   readonly onInstrumentationError?: (error: unknown) => void;
-  readonly resourceUsage: ResourceUsagePort;
+  readonly resourceUsage?: ResourceUsagePort;
 }

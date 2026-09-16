@@ -8,49 +8,184 @@
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
+      "node": {
+        "import": {
+          "types": "./dist/index.node.d.ts",
+          "default": "./dist/index.node.js"
+        },
+        "require": {
+          "types": "./dist/index.d.cts",
+          "default": "./dist/index.cjs"
+        }
+      },
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
     },
     "./testing": {
-      "types": "./dist/testing/index.d.ts",
-      "import": "./dist/testing/index.js",
-      "require": "./dist/testing/index.cjs"
+      "node": {
+        "import": {
+          "types": "./dist/testing/index.node.d.ts",
+          "default": "./dist/testing/index.node.js"
+        },
+        "require": {
+          "types": "./dist/testing/index.d.cts",
+          "default": "./dist/testing/index.cjs"
+        }
+      },
+      "import": {
+        "types": "./dist/testing/index.d.ts",
+        "default": "./dist/testing/index.js"
+      },
+      "require": {
+        "types": "./dist/testing/index.d.cts",
+        "default": "./dist/testing/index.cjs"
+      }
     },
     "./adapters/console": {
-      "types": "./dist/adapters/console/index.d.ts",
-      "import": "./dist/adapters/console/index.js",
-      "require": "./dist/adapters/console/index.cjs"
+      "node": {
+        "import": {
+          "types": "./dist/adapters/console/index.node.d.ts",
+          "default": "./dist/adapters/console/index.node.js"
+        },
+        "require": {
+          "types": "./dist/adapters/console/index.d.cts",
+          "default": "./dist/adapters/console/index.cjs"
+        }
+      },
+      "import": {
+        "types": "./dist/adapters/console/index.d.ts",
+        "default": "./dist/adapters/console/index.js"
+      },
+      "require": {
+        "types": "./dist/adapters/console/index.d.cts",
+        "default": "./dist/adapters/console/index.cjs"
+      }
     },
     "./adapters/node": {
-      "types": "./dist/adapters/node/index.d.ts",
-      "import": "./dist/adapters/node/index.js",
-      "require": "./dist/adapters/node/index.cjs"
+      "node": {
+        "import": {
+          "types": "./dist/adapters/node/index.node.d.ts",
+          "default": "./dist/adapters/node/index.node.js"
+        },
+        "require": {
+          "types": "./dist/adapters/node/index.d.cts",
+          "default": "./dist/adapters/node/index.cjs"
+        }
+      },
+      "import": {
+        "types": "./dist/adapters/node/index.d.ts",
+        "default": "./dist/adapters/node/index.js"
+      },
+      "require": {
+        "types": "./dist/adapters/node/index.d.cts",
+        "default": "./dist/adapters/node/index.cjs"
+      }
     },
     "./adapters/prometheus": {
-      "types": "./dist/adapters/prometheus/index.d.ts",
-      "import": "./dist/adapters/prometheus/index.js",
-      "require": "./dist/adapters/prometheus/index.cjs"
+      "node": {
+        "import": {
+          "types": "./dist/adapters/prometheus/index.node.d.ts",
+          "default": "./dist/adapters/prometheus/index.node.js"
+        },
+        "require": {
+          "types": "./dist/adapters/prometheus/index.d.cts",
+          "default": "./dist/adapters/prometheus/index.cjs"
+        }
+      },
+      "import": {
+        "types": "./dist/adapters/prometheus/index.d.ts",
+        "default": "./dist/adapters/prometheus/index.js"
+      },
+      "require": {
+        "types": "./dist/adapters/prometheus/index.d.cts",
+        "default": "./dist/adapters/prometheus/index.cjs"
+      }
     },
     "./contracts": {
-      "types": "./dist/contracts/index.d.ts",
-      "import": "./dist/contracts/index.js",
-      "require": "./dist/contracts/index.cjs"
+      "node": {
+        "import": {
+          "types": "./dist/contracts/index.node.d.ts",
+          "default": "./dist/contracts/index.node.js"
+        },
+        "require": {
+          "types": "./dist/contracts/index.d.cts",
+          "default": "./dist/contracts/index.cjs"
+        }
+      },
+      "import": {
+        "types": "./dist/contracts/index.d.ts",
+        "default": "./dist/contracts/index.js"
+      },
+      "require": {
+        "types": "./dist/contracts/index.d.cts",
+        "default": "./dist/contracts/index.cjs"
+      }
     },
     "./configuration": {
-      "types": "./dist/configuration/index.d.ts",
-      "import": "./dist/configuration/index.js",
-      "require": "./dist/configuration/index.cjs"
+      "node": {
+        "import": {
+          "types": "./dist/configuration/index.node.d.ts",
+          "default": "./dist/configuration/index.node.js"
+        },
+        "require": {
+          "types": "./dist/configuration/index.d.cts",
+          "default": "./dist/configuration/index.cjs"
+        }
+      },
+      "import": {
+        "types": "./dist/configuration/index.d.ts",
+        "default": "./dist/configuration/index.js"
+      },
+      "require": {
+        "types": "./dist/configuration/index.d.cts",
+        "default": "./dist/configuration/index.cjs"
+      }
     },
     "./instrumentation": {
-      "types": "./dist/instrumentation/index.d.ts",
-      "import": "./dist/instrumentation/index.js",
-      "require": "./dist/instrumentation/index.cjs"
+      "node": {
+        "import": {
+          "types": "./dist/instrumentation/index.node.d.ts",
+          "default": "./dist/instrumentation/index.node.js"
+        },
+        "require": {
+          "types": "./dist/instrumentation/index.d.cts",
+          "default": "./dist/instrumentation/index.cjs"
+        }
+      },
+      "import": {
+        "types": "./dist/instrumentation/index.d.ts",
+        "default": "./dist/instrumentation/index.js"
+      },
+      "require": {
+        "types": "./dist/instrumentation/index.d.cts",
+        "default": "./dist/instrumentation/index.cjs"
+      }
     },
     "./model": {
-      "types": "./dist/model/index.d.ts",
-      "import": "./dist/model/index.js",
-      "require": "./dist/model/index.cjs"
+      "node": {
+        "import": {
+          "types": "./dist/model/index.node.d.ts",
+          "default": "./dist/model/index.node.js"
+        },
+        "require": {
+          "types": "./dist/model/index.d.cts",
+          "default": "./dist/model/index.cjs"
+        }
+      },
+      "import": {
+        "types": "./dist/model/index.d.ts",
+        "default": "./dist/model/index.js"
+      },
+      "require": {
+        "types": "./dist/model/index.d.cts",
+        "default": "./dist/model/index.cjs"
+      }
     },
     "./package.json": "./package.json"
   },
@@ -61,9 +196,6 @@
   ],
   "sideEffects": false,
   "license": "MIT",
-  "engines": {
-    "node": ">=22"
-  },
   "keywords": [
     "metrics",
     "instrumentation",
@@ -88,7 +220,7 @@
   },
   "homepage": "https://haskou.github.io/metrics/",
   "scripts": {
-    "build": "tsup",
+    "build": "tsup && node scripts/build-node-wrappers.mjs",
     "docs:build": "vitepress build docs",
     "docs:dev": "vitepress dev docs",
     "docs:preview": "vitepress preview docs",
@@ -104,11 +236,12 @@
     "test": "yarn build && yarn test:typecheck && node --experimental-vm-modules node_modules/jest/bin/jest.js --runInBand",
     "test:coverage": "yarn build && yarn test:typecheck && node --experimental-vm-modules node_modules/jest/bin/jest.js --runInBand --coverage",
     "test:package": "yarn build && node scripts/verify-package.mjs",
-    "test:typecheck": "tsc -p tests/tsconfig.json && tsc -p tests/typescript/tsconfig.json && tsc -p tests/typescript-standard/tsconfig.json",
-    "typecheck": "tsc -p tsconfig.json --noEmit"
+    "test:typecheck": "tsc -p tests/tsconfig.json && tsc -p tests/typescript/tsconfig.json && tsc -p tests/typescript-standard/tsconfig.json && tsc -p tests/compatibility/tsconfig.json && tsc -p tests/compatibility/tsconfig.browser.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test:browser": "yarn build && node scripts/verify-browser.mjs"
   },
   "dependencies": {
-    "@haskou/value-objects": "^3.0.0"
+    "@haskou/value-objects": "^7.0.3"
   },
   "peerDependencies": {
     "prom-client": "^15.1.3"
@@ -119,23 +252,29 @@
     }
   },
   "devDependencies": {
-    "@haskou/eslint-config": "^0.2.1",
-    "@swc/core": "^1.15.43",
+    "@haskou/eslint-config": "^0.2.2",
+    "@swc/core": "^1.16.2",
     "@swc/jest": "^0.2.39",
     "@types/jest": "^30.0.0",
-    "@types/node": "^22.0.0",
-    "eslint": "^10.6.0",
-    "jest": "^30.4.2",
-    "prettier": "^3.9.4",
+    "@types/node": "^22.20.3",
+    "eslint": "^10.10.0",
+    "jest": "^30.5.1",
+    "prettier": "^3.9.7",
     "prom-client": "^15.1.3",
     "tsup": "^8.5.1",
     "typescript": "^6.0.3",
-    "vite": "^5.4.21",
+    "vite": "^8.3.0",
     "vitepress": "^1.6.4"
   },
   "directories": {
     "doc": "docs",
     "test": "tests"
   },
-  "author": ""
+  "author": "",
+  "imports": {
+    "#resource-usage": {
+      "node": "./dist/adapters/node/defaultResourceUsage.cjs",
+      "default": "./dist/adapters/system/defaultResourceUsage.js"
+    }
+  }
 }

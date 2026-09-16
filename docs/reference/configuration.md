@@ -39,16 +39,16 @@ directly and inject it instead of changing process-wide state.
 
 ### `MetricsConfiguration`
 
-| Property                 | Type                          | Default                        |
-| ------------------------ | ----------------------------- | ------------------------------ |
-| `adapter`                | `MetricsPort`                 | Required                       |
-| `attributes`             | `MetricAttributes`            | `{}`                           |
-| `clock`                  | `ClockPort`                   | Monotonic system clock         |
-| `logger`                 | `LoggerPort`                  | No-op after explicit configure |
-| `nameFormatter`          | `(operation, kind) => string` | `operation.kind`               |
-| `onInstrumentationError` | `(error: unknown) => void`    | No callback                    |
-| `prefix`                 | `string`                      | No prefix                      |
-| `resourceUsage`          | `ResourceUsagePort`           | Node.js process resource usage |
+| Property                 | Type                          | Default                           |
+| ------------------------ | ----------------------------- | --------------------------------- |
+| `adapter`                | `MetricsPort`                 | Required                          |
+| `attributes`             | `MetricAttributes`            | `{}`                              |
+| `clock`                  | `ClockPort`                   | Monotonic system clock            |
+| `logger`                 | `LoggerPort`                  | No-op after explicit configure    |
+| `nameFormatter`          | `(operation, kind) => string` | `operation.kind`                  |
+| `onInstrumentationError` | `(error: unknown) => void`    | No callback                       |
+| `prefix`                 | `string`                      | No prefix                         |
+| `resourceUsage`          | `ResourceUsagePort`           | Node sampling; absent in browsers |
 
 Shared attributes merge with method-level attributes. Method-level values win
 when both objects contain the same key.
@@ -72,6 +72,10 @@ error behavior of the instrumented operation.
 | `captureStackTrace` | `true`  | Adds a stack trace to failure logs           |
 | `recordCpu`         | `false` | Observes process CPU deltas                  |
 | `recordMemory`      | `false` | Observes process RSS, heap, and their deltas |
+
+CPU and memory switches automatically use process sampling in Node.js. Browsers
+omit resource measurements. A supplied `resourceUsage` adapter overrides the
+runtime default.
 
 Log switches still write nothing when the configured logger is a no-op.
 

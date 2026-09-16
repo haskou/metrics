@@ -77,7 +77,9 @@ default. The library never includes method arguments or return values.
 ## CPU and memory
 
 `ResourceUsagePort.capture()` returns a `ResourceUsageSnapshot`. Node.js
-support is built in:
+support is selected automatically when `recordCpu` or `recordMemory` is enabled.
+No adapter configuration is required. To override the runtime default, supply
+`resourceUsage` explicitly:
 
 ```typescript
 import { NodeResourceUsageAdapter } from '@haskou/metrics/adapters/node';
@@ -88,8 +90,9 @@ configureMetrics({
 });
 ```
 
-This is also the default resource adapter for configured instrumenters.
-Sampling only occurs when `recordCpu` or `recordMemory` is true.
+A custom `ResourceUsagePort` takes priority over the runtime default. Sampling
+only occurs when `recordCpu` or `recordMemory` is true. Browsers omit resource
+measurements unless a custom port is supplied.
 
 See [ports and telemetry records](/reference/contracts) for every port method,
 measurement kind, unit, snapshot field, and structured log field.
