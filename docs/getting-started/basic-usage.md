@@ -33,6 +33,10 @@ console.table(metrics.snapshot().metrics);
 metrics.clear();
 ```
 
+The CPU and memory options below automatically use Node process sampling in
+Node.js. Browsers omit those measurements. No resource adapter configuration is
+needed for the normal Node.js setup.
+
 ## Decorate a method
 
 Let the decorator derive `ClassName.methodName`:

@@ -29,7 +29,9 @@ Creates an instrumented function while preserving its TypeScript signature and
 Configures the process-wide runtime and returns an idempotent restore function.
 Configuration supports metrics, logger, clock, and resource-usage ports plus a
 prefix, shared attributes, custom name formatter, and instrumentation error
-callback. `NodeResourceUsageAdapter` is used when no resource port is supplied.
+callback. Node.js automatically supplies native process sampling when CPU or
+memory options are enabled; browsers omit those measurements. An explicit
+resource port overrides the runtime default.
 
 ### `MetricsInstrumenter`
 

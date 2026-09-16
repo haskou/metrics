@@ -3,7 +3,12 @@ import { defineConfig } from 'tsup';
 export default defineConfig({
   clean: true,
   dts: true,
+  external: ['#resource-usage'],
   entry: {
+    'adapters/node/defaultResourceUsage':
+      'src/adapters/node/defaultResourceUsage.ts',
+    'adapters/system/defaultResourceUsage':
+      'src/adapters/system/defaultResourceUsage.ts',
     'adapters/console/index': 'src/adapters/console/index.ts',
     'adapters/node/index': 'src/adapters/node/index.ts',
     'adapters/prometheus/index': 'src/adapters/prometheus/index.ts',
@@ -21,6 +26,6 @@ export default defineConfig({
     };
   },
   sourcemap: true,
-  splitting: false,
+  splitting: true,
   target: 'es2022',
 });

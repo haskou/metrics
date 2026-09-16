@@ -116,7 +116,7 @@ describe(InstrumentationExecution.name, () => {
   it('contains failures from instrumentation dependencies', () => {
     const reported: unknown[] = [];
     const expectedError = new Error('unavailable');
-    const { dependencies } = createContext({
+    const { dependencies, resourceUsage } = createContext({
       onInstrumentationError: (error: unknown) => {
         reported.push(error);
         throw new Error('handler failed');
@@ -134,7 +134,7 @@ describe(InstrumentationExecution.name, () => {
     dependencies.clock.now = () => {
       throw expectedError;
     };
-    dependencies.resourceUsage.capture = () => {
+    resourceUsage.capture = () => {
       throw expectedError;
     };
     const execution = new InstrumentationExecution('safe', dependencies, {

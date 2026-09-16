@@ -36,14 +36,17 @@ jobs:
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
-      - name: Run lint and tests with coverage
-        run: yarn lint && yarn test:coverage
-
       - name: Build package
         run: yarn build
 
+      - name: Run lint and tests with coverage
+        run: yarn lint && yarn typecheck && yarn test:coverage
+
       - name: Verify package entrypoints
         run: yarn test:package
+
+      - name: Verify browser portability
+        run: node scripts/verify-browser.mjs
 
       - name: Check npm package contents
         run: yarn pack:dry
@@ -55,10 +58,29 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           fail_ci_if_error: false
 
+  compatibility:
+    name: Package compatibility (Node ${{ matrix.node }})
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [22, 24, 26]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.18.0
+          cache: yarn
+      - run: yarn install --frozen-lockfile
+      - run: yarn build
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - run: node scripts/verify-package.mjs
+
   publish:
     name: Publish to npm
     runs-on: ubuntu-latest
-    needs: test
+    needs: [test, compatibility]
     concurrency:
       group: publish-${{ github.repository }}-${{ github.event.pull_request.base.ref }}
       cancel-in-progress: false

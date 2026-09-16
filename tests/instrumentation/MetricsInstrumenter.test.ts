@@ -6,6 +6,26 @@ import { InMemoryMetricsAdapter } from '../../src/testing/InMemoryMetricsAdapter
 import { ManualClock } from '../../src/testing/ManualClock.js';
 
 describe(MetricsInstrumenter.name, () => {
+  it('does not sample or fabricate resources without an explicit adapter', () => {
+    const adapter = new InMemoryMetricsAdapter();
+    const onInstrumentationError = jest.fn();
+    const instrumenter = new MetricsInstrumenter({
+      adapter,
+      onInstrumentationError,
+    });
+
+    expect(
+      instrumenter.measure('portable', () => 'ok', {
+        recordCpu: true,
+        recordDuration: false,
+        recordMemory: true,
+      }),
+    ).toBe('ok');
+
+    expect(adapter.observations).toEqual([]);
+    expect(onInstrumentationError).not.toHaveBeenCalled();
+  });
+
   it('measures synchronous success and failure', () => {
     const adapter = new InMemoryMetricsAdapter();
     const clock = new ManualClock();
