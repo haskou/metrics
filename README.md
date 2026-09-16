@@ -26,8 +26,9 @@ yarn add @haskou/metrics
 
 ## Runtime compatibility
 
-The core uses standard JavaScript (ES2022) and `performance.now()`, without a
-Node.js engine requirement. The package includes ESM and CommonJS builds with
+The core requires ES2022 and `performance.now()` (or a supplied `ClockPort`).
+The package does not declare a Node.js version range; this does not promise
+support for every historical Node.js release. The package includes ESM and CommonJS builds with
 matching TypeScript declarations. Node imports and requires share configuration
 and in-memory buffers, including imports through public subpaths.
 

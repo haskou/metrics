@@ -10,9 +10,10 @@ Or with Yarn:
 yarn add @haskou/metrics
 ```
 
-The core has no Node.js engine requirement. It uses ES2022 and
-`performance.now()` and ships ESM, CommonJS, source maps, and declarations for
-both module formats. Node imports and requires share one runtime across public
+The core requires ES2022 and `performance.now()` (or a supplied `ClockPort`).
+The package does not declare a Node.js version range; this does not promise
+support for every historical Node.js release. It ships ESM, CommonJS, source
+maps, and declarations for both module formats. Node imports and requires share one runtime across public
 entrypoints; browser bundlers select native ESM.
 
 Compatibility checks cover Node.js 22, 24 and 26 and a browser bundle executed

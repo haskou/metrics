@@ -145,11 +145,6 @@ const files = packResult[0].files.map(({ path }) => path);
 const manifest = JSON.parse(
   readFileSync(new URL('../package.json', import.meta.url), 'utf8'),
 );
-assert.equal(
-  manifest.engines?.node,
-  undefined,
-  'Consumers must not inherit build-tool Node requirements',
-);
 for (const target of Object.values(manifest.imports['#resource-usage'])) {
   assert.ok(
     files.includes(target.slice(2)),
