@@ -241,7 +241,7 @@
     "test:browser": "yarn build && node scripts/verify-browser.mjs"
   },
   "dependencies": {
-    "@haskou/value-objects": "^7.0.3"
+    "@haskou/value-objects": "^8.3.3"
   },
   "peerDependencies": {
     "prom-client": "^15.1.3"
